@@ -1,6 +1,6 @@
 {
   "name": "screen-projected-lines",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "draw wireframes using triangles in screen-projected coordinates",
   "main": "index.js",
   "devDependencies": {
