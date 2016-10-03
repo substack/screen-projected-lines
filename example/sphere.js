@@ -31,7 +31,7 @@ function sphere (regl) {
         vec4 p = proj*vec4(position,1);
         vec4 n = proj*vec4(nextpos,1);
         vec4 offset = linevoffset(p, n, direction, aspect);
-        gl_Position = p + offset*0.02*p.z;
+        gl_Position = p + offset*0.02/p.z;
       }
     `,
     attributes: {

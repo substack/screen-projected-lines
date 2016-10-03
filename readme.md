@@ -119,14 +119,14 @@ To have the thinkness have an exaggerated sense of depth:
 
 ``` glsl
 vec4 offset = linevoffset(p, n, direction, aspect);
-gl_Position = p + offset*0.02*p.z;
+gl_Position = p + offset*0.02/p.z;
 ```
 
 To have the thinkness not vary with depth:
 
 ``` glsl
 vec4 offset = linevoffset(p, n, direction, aspect);
-gl_Position = p + offset*0.02/p.z;
+gl_Position = p + offset*0.02*p.z;
 ```
 
 # install
