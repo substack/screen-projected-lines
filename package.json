@@ -1,0 +1,40 @@
+{
+  "name": "screen-projected-lines",
+  "version": "1.0.0",
+  "description": "draw wireframes using triangles in screen-projected coordinates",
+  "main": "index.js",
+  "devDependencies": {
+    "tape": "^4.6.0"
+  },
+  "scripts": {
+    "test": "tape test/*.js"
+  },
+  "keywords": [
+    "3d",
+    "lines",
+    "webgl",
+    "glslify",
+    "glsl",
+    "simplicial complex",
+    "wireframe",
+    "mesh",
+    "stackgl"
+  ],
+  "author": "substack",
+  "license": "BSD",
+  "directories": {
+    "example": "example",
+    "test": "test"
+  },
+  "dependencies": {
+    "tape": "^4.6.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/substack/screen-projected-lines.git"
+  },
+  "bugs": {
+    "url": "https://github.com/substack/screen-projected-lines/issues"
+  },
+  "homepage": "https://github.com/substack/screen-projected-lines#readme"
+}
