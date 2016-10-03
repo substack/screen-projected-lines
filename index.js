@@ -23,6 +23,6 @@ module.exports = function (mesh) {
     positions: pts,
     cells: cells,
     nextPositions: npts,
-    directions: dirs,
+    directions: dirs
   }
 }
