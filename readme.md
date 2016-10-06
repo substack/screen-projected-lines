@@ -14,7 +14,7 @@ have.
 # example
 
 In this demo, we will draw a wireframe sphere with an exaggerated sense of
-depth by multiplying the offset by `p.z`.
+depth by dividing the offset vector by `p.z`.
 
 [view this demo](https://substack.neocities.org/wireframe_sphere.html)
 
@@ -52,7 +52,7 @@ function sphere (regl) {
         vec4 p = proj*vec4(position,1);
         vec4 n = proj*vec4(nextpos,1);
         vec4 offset = linevoffset(p, n, direction, aspect);
-        gl_Position = p + offset*0.02*p.z;
+        gl_Position = p + offset*0.02/p.z;
       }
     `,
     attributes: {
