@@ -26,9 +26,6 @@
     "example": "example",
     "test": "test"
   },
-  "dependencies": {
-    "tape": "^4.6.0"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/substack/screen-projected-lines.git"
