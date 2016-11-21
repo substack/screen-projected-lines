@@ -86,7 +86,7 @@ var wireframe = require('screen-projected-lines')
 #pragma glslify: linevoffset = require('screen-projected-lines')
 ```
 
-## var wmesh = wireframe(mesh)
+## var wmesh = wireframe(mesh, opts={})
 
 Create a wireframe mesh given an existing triangular mesh.
 
@@ -96,9 +96,26 @@ The wireframe mesh has these properties:
 * `wmesh.cells` - array of triangle indices
 * `wmesh.nextPositions` - array of the next vertex coordinates
 * `wmesh.directions` - array of values to use for which side of each vertex
+* `wmesh.attributes` - extra attributes declared alongside vertices
 
 The normals are not computed on the CPU here so that you can apply additional
 displacements in your vertex shader.
+
+Optionally provide `opts.attributes` to declare attributes alongside the
+original vertices. For example, if you want to use computed surface normals to
+displace your wireframe mesh, you could do:
+
+```
+var anormals = require('angle-normals')
+var wmesh = wireframe(mesh, {
+  attributes: {
+    normals: anormals(mesh.cells, mesh.positions)
+  }
+})
+```
+
+and then you can use `wmesh.attributes.normals` alongside `wmesh.positions` as
+an attribute.
 
 ## vec4 offset = linevoffset(vec4 pos, vec4 nextpos, float direction, float aspect)
 
