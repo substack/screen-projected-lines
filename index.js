@@ -14,29 +14,6 @@ module.exports = function (mesh, opts) {
       vars[vkeys[k]] = []
     }
   }
-  /*
-  var medges = mesh.edges || []
-  for (var i = 0; i < medges.length; i++) {
-    var j = pts.length
-    var c = medges[i]
-    pts.push(mesh.positions[c[0]])
-    pts.push(mesh.positions[c[0]])
-    pts.push(mesh.positions[c[1]])
-    pts.push(mesh.positions[c[1]])
-    if (vars) {
-      for (var k = 0; k < vkeys.length; k++) {
-        var vkey = vkeys[k]
-        vars[vkey].push(opts.attributes[vkey][c[0]])
-        vars[vkey].push(opts.attributes[vkey][c[0]])
-        vars[vkey].push(opts.attributes[vkey][c[1]])
-        vars[vkey].push(opts.attributes[vkey][c[1]])
-      }
-    }
-    npts.push(pts[j+2],pts[j+3],pts[j],pts[j+1])
-    dirs.push(1,-1,1,-1)
-    cells.push([j,j+1,j+2],[j,j+2,j+3])
-  }
-  */
   var mcells = mesh.cells || []
   var edges = {}
   for (var i = 0; i < mcells.length; i++) {
@@ -57,8 +34,9 @@ module.exports = function (mesh, opts) {
   }
   for (var i = 0; i < mcells.length; i++) {
     var c = mcells[i]
-    for (var j = 0; j < 3; j++) {
-      var c0 = c[j], c1 = c[(j+1)%3]
+    var len = c.length
+    for (var j = 0; j < len; j++) {
+      var c0 = c[j], c1 = c[(j+1)%len]
       var ek = edgeKey(c0,c1)
       var e = edges[ek]
       var theta = Math.PI
@@ -79,8 +57,38 @@ module.exports = function (mesh, opts) {
       npts.push(pts[k+2],pts[k+3],pts[k],pts[k+1])
       dirs.push(1,-1,1,-1)
       angles.push(theta,theta,theta,theta)
+      if (vars) {
+        for (var k = 0; k < vkeys.length; k++) {
+          var vkey = vkeys[k]
+          vars[vkey].push(opts.attributes[vkey][c0[0]])
+          vars[vkey].push(opts.attributes[vkey][c0[1]])
+          vars[vkey].push(opts.attributes[vkey][c1[0]])
+          vars[vkey].push(opts.attributes[vkey][c1[1]])
+        }
+      }
       cells.push([k,k+1,k+2],[k,k+2,k+3])
     }
+  }
+  var medges = mesh.edges || []
+  for (var i = 0; i < medges.length; i++) {
+    var j = pts.length
+    var c = medges[i]
+    pts.push(mesh.positions[c[0]])
+    pts.push(mesh.positions[c[0]])
+    pts.push(mesh.positions[c[1]])
+    pts.push(mesh.positions[c[1]])
+    if (vars) {
+      for (var k = 0; k < vkeys.length; k++) {
+        var vkey = vkeys[k]
+        vars[vkey].push(opts.attributes[vkey][c[0]])
+        vars[vkey].push(opts.attributes[vkey][c[0]])
+        vars[vkey].push(opts.attributes[vkey][c[1]])
+        vars[vkey].push(opts.attributes[vkey][c[1]])
+      }
+    }
+    npts.push(pts[j+2],pts[j+3],pts[j],pts[j+1])
+    dirs.push(1,-1,1,-1)
+    cells.push([j,j+1,j+2],[j,j+2,j+3])
   }
   /*
   for (var i = 0; i < mcells.length; i++) {
