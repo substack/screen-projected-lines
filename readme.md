@@ -97,6 +97,7 @@ The wireframe mesh has these properties:
 * `wmesh.nextPositions` - array of the next vertex coordinates
 * `wmesh.directions` - array of values to use for which side of each vertex
 * `wmesh.attributes` - extra attributes declared alongside vertices
+* `wmesh.angles` - array of angles betwen the triangles that share an edge
 
 The normals are not computed on the CPU here so that you can apply additional
 displacements in your vertex shader.
