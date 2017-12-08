@@ -41,8 +41,15 @@ module.exports = function (mesh, opts) {
   var edges = {}
   for (var i = 0; i < mcells.length; i++) {
     var c = mcells[i]
-    for (var j = 0; j < 3; j++) {
-      var c0 = c[j], c1 = c[(j+1)%3]
+    if (c.length === 3) {
+      for (var j = 0; j < 3; j++) {
+        var c0 = c[j], c1 = c[(j+1)%3]
+        var ek = edgeKey(c0,c1)
+        if (edges[ek] === undefined) edges[ek] = [i]
+        else edges[ek].push(i)
+      }
+    } else if (c.length === 2) {
+      var c0 = c[0], c1 = c[1]
       var ek = edgeKey(c0,c1)
       if (edges[ek] === undefined) edges[ek] = [i]
       else edges[ek].push(i)
